@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mosquitto
+spec:
+  selector:
+    matchLabels:
+      app: mosquitto
+  template:
+    metadata:
+      labels:
+        app: mosquitto
+    spec:
+      containers:
+      - name: mosquitto
+        image: eclipse-mosquitto
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 1883
+        volumeMounts:
+         - name: mosquitto-datavolumeclaim
+           mountPath: "/mosquitto/data"
+         - name: mosquitto-logvolumeclaim
+           mountPath: "/mosquitto/log"
+         - name: mosquitto-configvolumeclaim
+           mountPath: "/mosquitto/config"
+      volumes:
+      - name: mosquitto-datavolumeclaim
+        persistentVolumeClaim:
+          claimName: mosquitto-datavolumeclaim
+      - name: mosquitto-logvolumeclaim
+        persistentVolumeClaim:
+          claimName: mosquitto-logvolumeclaim
+      - name: mosquitto-configvolumeclaim
+        persistentVolumeClaim:
+          claimName: mosquitto-configvolumeclaim

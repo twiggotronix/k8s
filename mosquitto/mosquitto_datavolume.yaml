@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mosquitto-datavolume
+spec:
+  storageClassName: hostpath
+  capacity: 
+    storage: "500m"
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/run/desktop/mnt/host/f/perso/projects/k8s/volumes/mosquitto/data"
+

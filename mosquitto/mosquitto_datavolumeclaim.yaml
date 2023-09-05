@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mosquitto-datavolumeclaim
+spec:
+  storageClassName: hostpath
+  resources:
+    requests:
+      storage: 500m
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
