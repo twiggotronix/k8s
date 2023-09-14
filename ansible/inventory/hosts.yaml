@@ -1,0 +1,14 @@
+k8s-controllers:
+  hosts:
+    192.168.2.41
+
+k8s-workers:
+  hosts:
+#    192.168.2.51
+
+k8s-nodes:
+  children:
+    k8s-controllers:
+    k8s-workers:
+  vars:
+    ansible_user: david
